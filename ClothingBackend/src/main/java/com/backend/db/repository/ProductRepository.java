@@ -38,7 +38,7 @@ public class ProductRepository {
 		);
 	}
 	
-	public void createProduct(
+	public List<Product> createProduct(
 			String name, 
 			Float price, 
 			String category, 
@@ -46,17 +46,13 @@ public class ProductRepository {
 			String size, 
 			Integer count, 
 			String city
-	) {
-		try {
-			jdbc.query(
-				"INSERT INTO product (name, price, category, color, size, count, city) " + 
-				"VALUES (?, ?, ?, ?, ?, ?, ?);",
-				new Object[] { name, price, category, color, size, count, city },
-				new ProductRowMapper()
-			);
-		} catch (DataIntegrityViolationException dive) {
-			
-		}
+	) throws DataIntegrityViolationException {	
+		return jdbc.query(
+			"INSERT INTO product (name, price, category, color, size, count, city) " + 
+			"VALUES (?, ?, ?, ?, ?, ?, ?);",
+			new Object[] { name, price, category, color, size, count, city },
+			new ProductRowMapper()
+		);
 	}
 	
 }
