@@ -69,9 +69,8 @@ public class ProductController {
 			);
 		} catch (DataIntegrityViolationException dive) {
 			return ResponseEntity.ok(createdProduct);
-		} finally {
-			return null;
 		}
+		return null;
 	}
 	
 	@PutMapping("/{id}")
